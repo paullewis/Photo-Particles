@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Photo Particles</title>
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<div id="menu">
+			<div id="menu-inner">
+				<h1>Photo Particles</h1>
+				<p>This is photo particles. I wondered what would happen
+					if I broke an image down into particles, and had three centres: red, green and blue.
+					Each particle would be attracted to or repulsed by the centres depending on how much
+					of each component colour they contain.</p>
+				<p>I recommend square images, like <a href="images/spectrum.png" target="_blank">this one</a>. And this uses 
+				<a href="https://github.com/mrdoob/three.js/" title="Three.js" target="_blank">three.js</a>,
+				so a massive thanks to <a href="http://mrdoob.com/" title="Mr. doob" target="_blank"> Mr. doob</a>.</p>
+				
+				<div id="gui">
+					<div class="gui-set clearfix">
+						<h2>Magnetism:</h2>
+						<a href="#" id="mode-attract">Attract</a>
+						<a href="#" id="mode-repel">Repel</a>
+					</div>
+					<div class="gui-set clearfix">
+						<h2>Fix particles to origin:</h2>
+						<a href="#" id="hold-particles-on">On</a>
+						<a href="#" id="hold-particles-off">Off</a>
+					</div>
+					<div class="gui-set clearfix">
+						<h2>Camera Orbit:</h2>
+						<a href="#" id="camera-orbit-on">On</a>
+						<a href="#" id="camera-orbit-off">Off</a>
+					</div>
+					<div class="gui-set clearfix">
+						<h2>Density:</h2>
+						<a href="#" id="density-low">Low</a>
+						<a href="#" id="density-medium">Medium</a>
+						<a href="#" id="density-high">High</a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div id="container">
+			
+		</div>
+		
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="js/RequestAnimationFrame.js"></script>
+	<script src="js/Three.js"></script>
+	<script src="js/PhotoParticles.js"></script>
+	<!-- Analytics --> 
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-13024693-3']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</html>
