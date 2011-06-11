@@ -2,3 +2,11 @@ Photo Particles
 ---------------
 
 This is photo particles. I wondered what would happen if I broke an image down into particles, and had three centres: red, green and blue. Each particle would be attracted to or repelled by the centres depending on how much of each component colour they contain.
+
+Additional credits:
+ - Mr. doob for Three.js
+ - Paul Irish for Modernizr & RequestAnimationFrame shim
+
+All three items [three, modernizr & rAF] are included to make things simpler, but obviously if you're interested
+you should take a proper look at those project. You should anyway because
+they're awesome.
