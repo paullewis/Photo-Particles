@@ -17,11 +17,21 @@
 				<a href="https://github.com/mrdoob/three.js/" title="Three.js" target="_blank">three.js</a>,
 				so a massive thanks to <a href="http://mrdoob.com/" title="Mr. doob" target="_blank"> Mr. doob</a>.</p>
 				
+				<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+				
 				<div id="gui">
 					<div class="gui-set clearfix">
 						<h2>Magnetism:</h2>
 						<a href="#" id="mode-attract">Attract</a>
 						<a href="#" id="mode-repel">Repel</a>
+					</div>
+					<div class="gui-set clearfix">
+						<h2>Magnet Strength:</h2>
+						<a href="#" id="strength-1">1</a>
+						<a href="#" id="strength-2">2</a>
+						<a href="#" id="strength-3">3</a>
+						<a href="#" id="strength-4">4</a>
+						<a href="#" id="strength-5">5</a>
 					</div>
 					<div class="gui-set clearfix">
 						<h2>Fix particles to origin:</h2>
@@ -45,13 +55,16 @@
 		</div>
 		<div id="container">
 			
+			<a href="http://aerotwist.com" title="Back to Aerotwist"><span>&larr;</span>Back to Aerotwist</a>
+			
 		</div>
 		
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="js/Modernizr.js"></script>
 	<script src="js/RequestAnimationFrame.js"></script>
 	<script src="js/Three.js"></script>
-	<script src="js/PhotoParticles.js"></script>
+	<script src="js/PhotoParticles.min.js"></script>
 	<!-- Analytics --> 
 	<script type="text/javascript">
 

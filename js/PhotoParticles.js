@@ -19,8 +19,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * 
- * Basically, go nuts and have fun. I'm just not responsible
- * if it all goes rather pear shaped :)
+ * Credit to Paul Truong for the idea that inspired me: 
+ * http://www.monocubed.com/2010/10/29/make3d-native-drag-drop-in-browser/
+ *
+ * And HTML5Doctor for the DnD code tutorial:
+ * http://html5doctor.com/native-drag-and-drop/
  */
 var AEROTWIST = AEROTWIST || {};
 AEROTWIST.PhotoParticles = new function()
@@ -50,8 +53,8 @@ AEROTWIST.PhotoParticles = new function()
 		ORBIT_RATE		= 0.01,
 		ATTRACT			= 0,
 		REPEL			= 1,
-		WIDTH			= $container.width() - 15,
-		HEIGHT			= $container.height() - 15,
+		WIDTH			= $container.width(),
+		HEIGHT			= $container.height(),
 		DENSITY			= 7,
 		NEAR			= 1,
 		FAR				= 10000,
@@ -78,9 +81,6 @@ AEROTWIST.PhotoParticles = new function()
 		camera 						= new THREE.Camera(45, WIDTH / HEIGHT, NEAR, FAR);
 	    scene 						= new THREE.Scene();
 	    renderer 					= new THREE.WebGLRenderer();
-
-	    // position the camera
-	    camera.position.y			= camera.target.position.y = -HEIGHT * .5;
 	    
 	    // start the renderer
 	    renderer.setSize(WIDTH, HEIGHT);
@@ -113,7 +113,10 @@ AEROTWIST.PhotoParticles = new function()
 		container.addEventListener('dragexit', cancel, false);
 		container.addEventListener('drop', dropFile, false);
 		
-		// gui events
+		// gui events - I did these
+		// brute force, but there's a ton
+		// of improvement that *could* be 
+		// done here.
 		$("#hold-particles-on").click(callbacks.holdAtOriginOn);
 		$("#hold-particles-off").click(callbacks.holdAtOriginOff);
 		$("#hold-particles-off").trigger('click');
@@ -125,6 +128,13 @@ AEROTWIST.PhotoParticles = new function()
 		$("#mode-attract").click(callbacks.modeAttract);
 		$("#mode-repel").click(callbacks.modeRepel);
 		$("#mode-attract").trigger('click');
+		
+		$("#strength-1").click(callbacks.strength1);
+		$("#strength-2").click(callbacks.strength2);
+		$("#strength-3").click(callbacks.strength3);
+		$("#strength-4").click(callbacks.strength4);
+		$("#strength-5").click(callbacks.strength5);
+		$("#strength-3").trigger('click');
 		
 		$("#bounce-particles-on").click(callbacks.bounceParticlesOn);
 		$("#bounce-particles-off").click(callbacks.bounceParticlesOff);
@@ -259,24 +269,24 @@ AEROTWIST.PhotoParticles = new function()
 			BlueMaterial					= new THREE.MeshLambertMaterial({color: 0x0000CC});
 		
 		// red
-		redCentre 							= new THREE.Mesh( new Sphere( 20, 5, 5 ), redMaterial);
-		redCentre.position.y 				= -120;
+		redCentre 							= new THREE.Mesh( new Sphere( 20, 16, 16 ), redMaterial);
+		redCentre.position.y 				= 120;
 		redCentre.position.z 				= -160;
 		redCentre.mass 						= CENTRE_MASS;
 		redCentre.boundRadiusSquared		= redCentre.boundRadius * redCentre.boundRadius;
 		
 		// green
-		greenCentre 						= new THREE.Mesh( new Sphere( 20, 5, 5 ), greenMaterial);
+		greenCentre 						= new THREE.Mesh( new Sphere( 20, 16, 16 ), greenMaterial);
 		greenCentre.position.z 				= 160;
-		greenCentre.position.y				= -240;
+		greenCentre.position.y				= -120;
 		greenCentre.position.x				= -160;
 		greenCentre.mass 					= CENTRE_MASS;
 		greenCentre.boundRadiusSquared		= greenCentre.boundRadius * greenCentre.boundRadius;
 		
 		// blue
-		blueCentre 							= new THREE.Mesh( new Sphere( 20, 5, 5 ), BlueMaterial);
+		blueCentre 							= new THREE.Mesh( new Sphere( 20, 16, 16 ), BlueMaterial);
 		blueCentre.position.z 				= 160;
-		blueCentre.position.y				= -240;
+		blueCentre.position.y				= -120;
 		blueCentre.position.x				= 160;
 		blueCentre.mass 					= CENTRE_MASS;
 		blueCentre.boundRadiusSquared		= blueCentre.boundRadius * blueCentre.boundRadius;
@@ -332,7 +342,7 @@ AEROTWIST.PhotoParticles = new function()
 			    {
 			    	var pixelCol	= (pixels.data[p] << 16) + (pixels.data[p+1] << 8) + pixels.data[p+2];
 			    	var color 		= new THREE.Color(pixelCol);
-			    	var vector 		= new THREE.Vector3(-300 + x/4, -y, 0);
+			    	var vector 		= new THREE.Vector3(-300 + x/4, 240 - y, 0);
 			    	
 			    	// push on the particle
 			    	geometry.vertices.push(new THREE.Vertex(vector));
@@ -450,7 +460,7 @@ AEROTWIST.PhotoParticles = new function()
 		if(orbitCamera)
 		{
 			camera.position.x = Math.sin(orbitValue) * DEPTH;
-			camera.position.y = Math.sin(orbitValue) * 100;
+			camera.position.y = Math.sin(orbitValue) * 300;
 			camera.position.z = Math.cos(orbitValue) * DEPTH;
 			orbitValue += ORBIT_RATE;
 		}
@@ -562,10 +572,40 @@ AEROTWIST.PhotoParticles = new function()
 			}
 			return false;
 		},
+		strength1: function() {
+			AGGRESSION = 1;
+			$(this).removeClass('disabled');
+			$(this).siblings('a').addClass('disabled');
+			return false;
+		},
+		strength2: function() {
+			AGGRESSION = 10;
+			$(this).removeClass('disabled');
+			$(this).siblings('a').addClass('disabled');
+			return false;
+		},
+		strength3: function() {
+			AGGRESSION = 20;
+			$(this).removeClass('disabled');
+			$(this).siblings('a').addClass('disabled');
+			return false;
+		},
+		strength4: function() {
+			AGGRESSION = 35;
+			$(this).removeClass('disabled');
+			$(this).siblings('a').addClass('disabled');
+			return false;
+		},
+		strength5: function() {
+			AGGRESSION = 50;
+			$(this).removeClass('disabled');
+			$(this).siblings('a').addClass('disabled');
+			return false;
+		},
 		windowResize: function() {
 			
-			WIDTH			= $container.width() - 15,
-			HEIGHT			= $container.height() - 15,
+			WIDTH			= $container.width(),
+			HEIGHT			= $container.height(),
 			camera.aspect 	= WIDTH / HEIGHT,
 			renderer.setSize(WIDTH, HEIGHT);
 			
@@ -577,7 +617,8 @@ AEROTWIST.PhotoParticles = new function()
 // Split photos to particles...?
 $(document).ready(function(){
 	
-	// Go!
-	AEROTWIST.PhotoParticles.init();
-
+	if(Modernizr.webgl) {
+		// Go!
+		AEROTWIST.PhotoParticles.init();
+	}
 });
