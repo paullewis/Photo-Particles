@@ -1,0 +1,4 @@
+Photo Particles
+---------------
+
+This is photo particles. I wondered what would happen if I broke an image down into particles, and had three centres: red, green and blue. Each particle would be attracted to or repelled by the centres depending on how much of each component colour they contain.
